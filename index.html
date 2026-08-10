@@ -131,7 +131,7 @@
         </div>
 
         <!-- Filter / Search Results Summary -->
-        <div id="search-results-count" class="search-status" aria-live="polite">Showing all 6 projects</div>
+        <div id="search-results-count" class="search-status">Showing all 6 projects</div>
 
         <!-- Project Cards Grid -->
         <div class="projects-grid" id="projects-container">
@@ -431,12 +431,12 @@
             </div>
 
             <!-- Grid / List View Toggle -->
-            <div class="view-toggle-group" role="radiogroup" aria-label="Calendar layout view">
-              <button type="button" class="view-toggle-btn active" id="btn-view-grid" role="radio" aria-checked="true" aria-label="Grid View">
+            <div class="view-toggle-group" role="group" aria-label="Calendar layout view">
+              <button type="button" class="view-toggle-btn active" id="btn-view-grid" aria-pressed="true" aria-label="Grid View">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
                 <span>Grid</span>
               </button>
-              <button type="button" class="view-toggle-btn" id="btn-view-list" role="radio" aria-checked="false" aria-label="List View">
+              <button type="button" class="view-toggle-btn" id="btn-view-list" aria-pressed="false" aria-label="List View">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
                 <span>List</span>
               </button>
@@ -588,7 +588,6 @@
 
   <!-- Project Details Accessible Dialog -->
   <dialog id="project-modal" class="project-modal" aria-labelledby="modal-title" aria-describedby="modal-desc">
-    <div class="modal-backdrop"></div>
     <div class="modal-content-wrapper">
       
       <!-- Modal Header -->
@@ -645,7 +644,6 @@
 
   <!-- Event Details Accessible Dialog -->
   <dialog id="event-modal" class="event-modal project-modal" aria-labelledby="event-modal-title" aria-describedby="event-modal-desc">
-    <div class="modal-backdrop"></div>
     <div class="modal-content-wrapper">
       
       <!-- Modal Header -->

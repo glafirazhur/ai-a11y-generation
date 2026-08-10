@@ -131,11 +131,9 @@ function initSearch() {
 
       if (matches) {
         card.classList.remove('hidden');
-        card.setAttribute('aria-hidden', 'false');
         visibleCount++;
       } else {
         card.classList.add('hidden');
-        card.setAttribute('aria-hidden', 'true');
       }
     });
 
@@ -158,6 +156,13 @@ function initSearch() {
   searchInput.addEventListener('input', () => {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(filterProjects, 150);
+  });
+
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && searchInput.value) {
+      searchInput.value = '';
+      filterProjects();
+    }
   });
 
   clearBtn?.addEventListener('click', () => {
@@ -216,6 +221,12 @@ function initModal() {
       techContainer.appendChild(li);
     });
 
+    // Populate external demo link
+    const externalLink = document.getElementById('modal-external-link');
+    if (externalLink) {
+      externalLink.href = data.link || '#';
+    }
+
     // Show dialog
     if (typeof modal.showModal === 'function') {
       modal.showModal();
@@ -259,19 +270,27 @@ function initModal() {
 
   closeBtn?.addEventListener('click', closeModal);
   secondaryCloseBtn?.addEventListener('click', closeModal);
-  backdrop?.addEventListener('click', closeModal);
 
-  // Close on Escape Key
-  modal.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
+  // Close on native dialog cancel (e.g. Escape key)
+  modal.addEventListener('cancel', (e) => {
+    e.preventDefault();
+    closeModal();
+  });
+
+  // Close when clicking native dialog backdrop
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
       closeModal();
     }
+  });
 
-    // Keyboard Focus Trap inside modal
+  // Keyboard Focus Trap inside modal
+  modal.addEventListener('keydown', (e) => {
     if (e.key === 'Tab') {
       const focusables = modal.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       );
+      if (focusables.length === 0) return;
       const first = focusables[0];
       const last = focusables[focusables.length - 1];
 
@@ -314,6 +333,22 @@ function initMobileNav() {
         toggleBtn.setAttribute('aria-expanded', 'false');
       }
     });
+  });
+
+  // Close nav on click outside or Escape key
+  document.addEventListener('click', (e) => {
+    if (navMenu.classList.contains('is-open') && !navMenu.contains(e.target) && !toggleBtn.contains(e.target)) {
+      navMenu.classList.remove('is-open');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navMenu.classList.contains('is-open')) {
+      navMenu.classList.remove('is-open');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      toggleBtn.focus();
+    }
   });
 }
 
@@ -703,16 +738,16 @@ function initEventsCalendar() {
   function setView(view) {
     if (view === 'grid') {
       btnGrid.classList.add('active');
-      btnGrid.setAttribute('aria-checked', 'true');
+      btnGrid.setAttribute('aria-pressed', 'true');
       btnList.classList.remove('active');
-      btnList.setAttribute('aria-checked', 'false');
+      btnList.setAttribute('aria-pressed', 'false');
       gridView.classList.remove('hidden');
       listView.classList.add('hidden');
     } else {
       btnList.classList.add('active');
-      btnList.setAttribute('aria-checked', 'true');
+      btnList.setAttribute('aria-pressed', 'true');
       btnGrid.classList.remove('active');
-      btnGrid.setAttribute('aria-checked', 'false');
+      btnGrid.setAttribute('aria-pressed', 'false');
       listView.classList.remove('hidden');
       gridView.classList.add('hidden');
     }
@@ -746,10 +781,16 @@ function initEventModal() {
 
   closeBtn?.addEventListener('click', closeModal);
   secondaryCloseBtn?.addEventListener('click', closeModal);
-  backdrop?.addEventListener('click', closeModal);
 
-  modal.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
+  modal.addEventListener('cancel', (e) => {
+    e.preventDefault();
+    closeModal();
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
   });
 
   addCalBtn?.addEventListener('click', () => {
