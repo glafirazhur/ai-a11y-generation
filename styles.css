@@ -597,7 +597,7 @@ p {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  height: 4.65em; /* Exactly 3 lines at line-height 1.55 */
+  max-height: 4.65em;
 }
 
 .card-footer {
@@ -862,32 +862,23 @@ p {
 
 /* 12. Accessible Project Modal Dialog */
 .project-modal {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  max-width: 100vw;
-  max-height: 100vh;
-  margin: 0;
-  padding: 2rem 1.5rem;
-  background: transparent;
   border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
+  background: transparent;
+  padding: 0;
+  margin: auto;
+  max-width: 780px;
+  width: calc(100vw - 2rem);
+  max-height: 90vh;
+}
+
+.project-modal::backdrop {
+  background: rgba(7, 10, 18, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .project-modal:not([open]) {
   display: none;
-}
-
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(7, 10, 18, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
 .modal-content-wrapper {
