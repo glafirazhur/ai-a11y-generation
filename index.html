@@ -414,29 +414,29 @@
             <div class="category-filters" role="group" aria-label="Filter events by category">
               <button type="button" class="filter-pill active" data-category="all" aria-pressed="true">All Events</button>
               <button type="button" class="filter-pill" data-category="keynote" aria-pressed="false">
-                <span class="category-dot category-dot-keynote"></span>Keynotes
+                <span class="category-dot category-dot-keynote" aria-hidden="true"></span>Keynotes
               </button>
               <button type="button" class="filter-pill" data-category="exhibition" aria-pressed="false">
-                <span class="category-dot category-dot-exhibition"></span>Exhibitions
+                <span class="category-dot category-dot-exhibition" aria-hidden="true"></span>Exhibitions
               </button>
               <button type="button" class="filter-pill" data-category="workshop" aria-pressed="false">
-                <span class="category-dot category-dot-workshop"></span>Workshops
+                <span class="category-dot category-dot-workshop" aria-hidden="true"></span>Workshops
               </button>
               <button type="button" class="filter-pill" data-category="panel" aria-pressed="false">
-                <span class="category-dot category-dot-panel"></span>Panels
+                <span class="category-dot category-dot-panel" aria-hidden="true"></span>Panels
               </button>
               <button type="button" class="filter-pill" data-category="webinar" aria-pressed="false">
-                <span class="category-dot category-dot-webinar"></span>Webinars
+                <span class="category-dot category-dot-webinar" aria-hidden="true"></span>Webinars
               </button>
             </div>
 
             <!-- Grid / List View Toggle -->
             <div class="view-toggle-group" role="group" aria-label="Calendar layout view">
-              <button type="button" class="view-toggle-btn active" id="btn-view-grid" aria-pressed="true" aria-label="Grid View">
+              <button type="button" class="view-toggle-btn active" id="btn-view-grid" aria-pressed="true">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
                 <span>Grid</span>
               </button>
-              <button type="button" class="view-toggle-btn" id="btn-view-list" aria-pressed="false" aria-label="List View">
+              <button type="button" class="view-toggle-btn" id="btn-view-list" aria-pressed="false">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
                 <span>List</span>
               </button>
@@ -448,7 +448,7 @@
         <div id="calendar-status-msg" class="sr-only" aria-live="polite">Showing all 6 events for August 2026</div>
 
         <!-- Visual Calendar Grid Card -->
-        <div id="calendar-grid-view" class="calendar-card">
+        <div id="calendar-grid-view" class="calendar-card" role="grid" aria-label="August 2026 Event Calendar Grid">
           <!-- Weekday Headers -->
           <div class="calendar-weekdays" role="row">
             <div class="weekday-header" role="columnheader"><abbr title="Sunday">Sun</abbr></div>
@@ -460,8 +460,8 @@
             <div class="weekday-header" role="columnheader"><abbr title="Saturday">Sat</abbr></div>
           </div>
 
-          <!-- Calendar Days Grid -->
-          <div class="calendar-days-grid" id="calendar-days-container" role="grid" aria-label="August 2026 Event Calendar Grid">
+          <!-- Calendar Days Grid Container -->
+          <div class="calendar-days-grid" id="calendar-days-container" role="rowgroup">
             <!-- Populated dynamically via JS -->
           </div>
         </div>

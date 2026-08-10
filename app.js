@@ -612,19 +612,24 @@ function initEventsCalendar() {
 
     /* 1. Grid View Render */
     const prevMonthDays = 31;
+    let allCells = [];
+
+    // July previous month cells
     for (let i = startDayOfWeek - 1; i >= 0; i--) {
       const dayNum = prevMonthDays - i;
       const cell = document.createElement('div');
       cell.className = 'calendar-day-cell other-month';
       cell.setAttribute('role', 'gridcell');
+      cell.setAttribute('aria-label', `July ${dayNum}, 2026`);
       cell.innerHTML = `
         <div class="day-header-row">
-          <span class="day-number" aria-label="July ${dayNum}">${dayNum}</span>
+          <span class="day-number" aria-hidden="true">${dayNum}</span>
         </div>
       `;
-      daysContainer.appendChild(cell);
+      allCells.push(cell);
     }
 
+    // August current month cells
     for (let day = 1; day <= totalDaysInMonth; day++) {
       const cell = document.createElement('div');
       const isToday = (day === todayDate);
@@ -638,7 +643,7 @@ function initEventsCalendar() {
         eventsHtml = `<div class="day-events-wrapper">`;
         dayEvts.forEach(evt => {
           eventsHtml += `
-            <button type="button" class="event-chip cat-${evt.category}" data-event-id="${evt.id}" aria-label="${evt.title}, ${evt.time}">
+            <button type="button" class="event-chip cat-${evt.category}" data-event-id="${evt.id}" aria-label="${evt.categoryName}: ${evt.title}, at ${evt.time}">
               <span class="event-chip-time">${evt.time}</span>
               <span class="event-chip-title">${evt.title}</span>
             </button>
@@ -655,21 +660,34 @@ function initEventsCalendar() {
         ${eventsHtml}
       `;
 
-      daysContainer.appendChild(cell);
+      allCells.push(cell);
     }
 
+    // September next month cells
     const totalCellsSoFar = startDayOfWeek + totalDaysInMonth;
     const remainingCells = (totalCellsSoFar <= 35) ? (35 - totalCellsSoFar) : (42 - totalCellsSoFar);
     for (let day = 1; day <= remainingCells; day++) {
       const cell = document.createElement('div');
       cell.className = 'calendar-day-cell other-month';
       cell.setAttribute('role', 'gridcell');
+      cell.setAttribute('aria-label', `September ${day}, 2026`);
       cell.innerHTML = `
         <div class="day-header-row">
-          <span class="day-number" aria-label="September ${day}">${day}</span>
+          <span class="day-number" aria-hidden="true">${day}</span>
         </div>
       `;
-      daysContainer.appendChild(cell);
+      allCells.push(cell);
+    }
+
+    // Group cells into 7-day week rows for valid ARIA grid hierarchy (grid -> row -> gridcell)
+    for (let i = 0; i < allCells.length; i += 7) {
+      const weekRow = document.createElement('div');
+      weekRow.className = 'calendar-week-row';
+      weekRow.setAttribute('role', 'row');
+      for (let j = i; j < i + 7 && j < allCells.length; j++) {
+        weekRow.appendChild(allCells[j]);
+      }
+      daysContainer.appendChild(weekRow);
     }
 
     /* 2. List View Render */
@@ -681,9 +699,9 @@ function initEventsCalendar() {
         item.className = 'event-list-item';
         item.setAttribute('role', 'listitem');
         item.innerHTML = `
-          <div class="event-list-date-box">
-            <span class="event-list-day">${evt.day}</span>
-            <span class="event-list-month">AUG</span>
+          <div class="event-list-date-box" aria-label="${evt.dateString}">
+            <span class="event-list-day" aria-hidden="true">${evt.day}</span>
+            <abbr class="event-list-month" title="${evt.month}">${evt.month.substring(0, 3).toUpperCase()}</abbr>
           </div>
           <div class="event-list-details">
             <div class="event-list-meta">
@@ -692,12 +710,12 @@ function initEventsCalendar() {
             </div>
             <h4 class="event-list-title">${evt.title}</h4>
             <p class="event-list-location">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               ${evt.location}
             </p>
           </div>
           <div>
-            <button type="button" class="btn btn-secondary" data-event-id="${evt.id}" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+            <button type="button" class="btn btn-secondary" data-event-id="${evt.id}" aria-label="View details for ${evt.title}" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
               View Details
             </button>
           </div>
@@ -766,16 +784,27 @@ function initEventModal() {
   const modal = document.getElementById('event-modal');
   const closeBtn = document.getElementById('event-modal-close-btn');
   const secondaryCloseBtn = modal?.querySelector('.event-modal-secondary-close');
-  const backdrop = modal?.querySelector('.modal-backdrop');
   const addCalBtn = document.getElementById('event-modal-add-cal');
 
   if (!modal) return;
 
   function closeModal() {
-    modal.close();
+    if (typeof modal.close === 'function' && modal.open) {
+      modal.close();
+    } else {
+      modal.removeAttribute('open');
+    }
+
     modal.classList.remove('active');
-    if (lastFocusedElement) {
+    document.body.style.overflow = '';
+
+    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
       lastFocusedElement.focus();
+    }
+
+    const announcer = document.getElementById('a11y-announcer');
+    if (announcer) {
+      announcer.textContent = 'Closed event details dialog';
     }
   }
 
@@ -793,9 +822,39 @@ function initEventModal() {
     }
   });
 
+  // Keyboard Focus Trap inside event modal
+  modal.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab') {
+      const focusables = modal.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
   addCalBtn?.addEventListener('click', () => {
     const title = document.getElementById('event-modal-title').textContent;
-    alert(`"${title}" has been added to your calendar schedule!`);
+    const announcer = document.getElementById('a11y-announcer');
+    if (announcer) {
+      announcer.textContent = `"${title}" has been added to your calendar schedule.`;
+    }
+    addCalBtn.textContent = 'Added to Calendar ✓';
+    setTimeout(() => {
+      addCalBtn.innerHTML = `
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Add to Calendar
+      `;
+    }, 2500);
   });
 }
 
@@ -820,7 +879,26 @@ function openEventModal(evtId) {
     topicsList.innerHTML = evt.topics.map(t => `<li class="tech-tag">${t}</li>`).join('');
   }
 
-  modal.showModal();
+  const addCalBtn = document.getElementById('event-modal-add-cal');
+  if (addCalBtn) {
+    addCalBtn.setAttribute('aria-label', `Add ${evt.title} to calendar schedule`);
+  }
+
+  if (typeof modal.showModal === 'function') {
+    modal.showModal();
+  } else {
+    modal.setAttribute('open', '');
+  }
+
   modal.classList.add('active');
-  document.getElementById('event-modal-close-btn').focus();
+  document.body.style.overflow = 'hidden';
+
+  setTimeout(() => {
+    document.getElementById('event-modal-close-btn')?.focus();
+  }, 50);
+
+  const announcer = document.getElementById('a11y-announcer');
+  if (announcer) {
+    announcer.textContent = `Opened event details dialog for ${evt.title}`;
+  }
 }
