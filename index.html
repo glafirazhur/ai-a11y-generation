@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Elena Vance — Digital Artist & Accessible UI/UX Designer showcasing innovative interactive project cards, generative art, and spatial interface design.">
+  <meta name="keywords" content="portfolio, digital artist, UI UX design, accessible web design, web developer, graphics, spatial UI">
+  <title>Elena Vance — Digital Artist & UI/UX Designer Portfolio</title>
+  
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Skip to Main Content Link for Keyboard & Screen Reader Accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ARIA Live Region for Screen Reader Announcements -->
+  <div id="a11y-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#" class="brand-logo" aria-label="Elena Vance Portfolio Home">
+        <svg class="logo-icon" aria-hidden="true" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+          <path d="M9 23V9L17 17L23 9V23" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#8B5CF6"/>
+              <stop offset="1" stop-color="#06B6D4"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="brand-text">Elena Vance</span>
+      </a>
+
+      <!-- Search Component in Top Bar -->
+      <div class="search-box-wrapper" role="search">
+        <label for="project-search-input" class="sr-only">Search latest projects by title, category, or description</label>
+        <div class="search-input-group">
+          <svg class="search-icon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input 
+            type="search" 
+            id="project-search-input" 
+            class="search-input" 
+            placeholder="Search projects..." 
+            autocomplete="off"
+            aria-describedby="search-hint"
+          >
+          <button type="button" id="clear-search-btn" class="clear-search-btn hidden" aria-label="Clear search input">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <span id="search-hint" class="sr-only">Filter projects in real-time as you type</span>
+      </div>
+
+      <!-- Mobile Navigation Toggle Button -->
+      <button 
+        type="button" 
+        class="mobile-nav-toggle" 
+        aria-controls="primary-navigation" 
+        aria-expanded="false" 
+        aria-label="Toggle navigation menu"
+      >
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+
+      <!-- Navigation Links -->
+      <nav id="primary-navigation" class="nav-menu" aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+          <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="#events" class="nav-link">Events</a></li>
+          <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Full-Width Banner Image Section -->
+  <section class="banner-section" aria-label="Featured Artist Banner">
+    <div class="banner-wrapper">
+      <img 
+        src="assets/hero_banner.png" 
+        alt="Vibrant abstract digital art canvas with fluid glowing violet and cyan waves created by Elena Vance" 
+        class="banner-image"
+        fetchpriority="high"
+        width="1920"
+        height="600"
+      >
+      <div class="banner-overlay">
+        <div class="banner-content">
+          <span class="badge">Digital Artist &amp; Accessible Systems Architect</span>
+          <h1 class="banner-title">Designing Inclusive &amp; Visionary Digital Experiences</h1>
+          <p class="banner-subtitle">Merging high-end visual aesthetics with uncompromising Web Accessibility standards (WCAG AAA).</p>
+          <div class="banner-actions">
+            <a href="#projects" class="btn btn-primary">Explore Work</a>
+            <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Landmark -->
+  <main id="main-content">
+
+    <!-- 6 Latest Project Cards Section -->
+    <section id="projects" class="section projects-section" aria-labelledby="projects-heading">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="section-tagline">Portfolio Showcase</span>
+            <h2 id="projects-heading" class="section-title">Latest Projects</h2>
+          </div>
+          <p class="section-description">A curated selection of my 6 recent works spanning data visualization, mobile app UI/UX, 3D generative art, and accessible commerce platforms.</p>
+        </div>
+
+        <!-- Filter / Search Results Summary -->
+        <div id="search-results-count" class="search-status" aria-live="polite">Showing all 6 projects</div>
+
+        <!-- Project Cards Grid -->
+        <div class="projects-grid" id="projects-container">
+
+          <!-- Card 1 -->
+          <article class="project-card" data-category="visualization analytics data dark" data-id="1">
+            <div class="card-media">
+              <img 
+                src="assets/project1.png" 
+                alt="Interactive Data Visualization Dashboard showing sleek dark interface with glowing violet charts" 
+                class="card-image"
+                loading="lazy"
+                width="600"
+                height="400"
+              >
+              <span class="card-tag">Data Visualization</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">
+                <a href="#project-1-details" class="card-title-link" data-open-modal="1">Nova Metrics — Analytics Visualizer</a>
+              </h3>
+              <p class="card-description">
+                A real-time data analytics dashboard designed for high-density metrics monitoring. Features customizable glowing data widgets, high-contrast dark themes, and screen-reader accessible chart telemetry.
+              </p>
+              <div class="card-footer">
+                <button type="button" class="btn-details" aria-haspopup="dialog" data-project-id="1">
+                  Show details
+                  <svg class="btn-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="project-card" data-category="mobile application eco design UX" data-id="2">
+            <div class="card-media">
+              <img 
+                src="assets/project2.png" 
+                alt="Verde Eco-App UI on a smartphone screen showing clean green energy tracking interfaces" 
+                class="card-image"
+                loading="lazy"
+                width="600"
+                height="400"
+              >
+              <span class="card-tag">Mobile UI/UX</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">
+                <a href="#project-2-details" class="card-title-link" data-open-modal="2">Verde — Sustainable Living Mobile App</a>
+              </h3>
+              <p class="card-description">
+                An intuitive mobile experience guiding urban users toward carbon-neutral habits through micro-incentives. Features fluid gesture interactions, dynamic habit visualizers, and AAA contrast palette modes.
+              </p>
+              <div class="card-footer">
+                <button type="button" class="btn-details" aria-haspopup="dialog" data-project-id="2">
+                  Show details
+                  <svg class="btn-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="project-card" data-category="generative 3d art brand logo" data-id="3">
+            <div class="card-media">
+              <img 
+                src="assets/project3.png" 
+                alt="3D Generative AI Brand Identity showing glowing geometric glass artwork" 
+                class="card-image"
+                loading="lazy"
+                width="600"
+                height="400"
+              >
+              <span class="card-tag">Generative Art</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">
+                <a href="#project-3-details" class="card-title-link" data-open-modal="3">Aetheria — AI Brand Identity &amp; Sculptures</a>
+              </h3>
+              <p class="card-description">
+                A series of algorithmic 3D glass sculptures created using procedural shaders and generative mathematical equations. Commissioned for an international immersive art gallery installation in London.
+              </p>
+              <div class="card-footer">
+                <button type="button" class="btn-details" aria-haspopup="dialog" data-project-id="3">
+                  Show details
+                  <svg class="btn-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="project-card" data-category="ecommerce luxury web dynamic accessible" data-id="4">
+            <div class="card-media">
+              <img 
+                src="assets/project4.png" 
+                alt="Luxury accessible e-commerce platform web design rendered on a modern laptop" 
+                class="card-image"
+                loading="lazy"
+                width="600"
+                height="400"
+              >
+              <span class="card-tag">E-Commerce</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">
+                <a href="#project-4-details" class="card-title-link" data-open-modal="4">Aura Luxury — Accessible Shopping Experience</a>
+              </h3>
+              <p class="card-description">
+                A high-end retail interface crafted around universal design principles. Integrates full keyboard checkout flows, voice-assisted item exploration, screen-reader optimized product galleries, and ultra-fast page speed.
+              </p>
+              <div class="card-footer">
+                <button type="button" class="btn-details" aria-haspopup="dialog" data-project-id="4">
+                  Show details
+                  <svg class="btn-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="project-card" data-category="spatial audio ar 3d interface visualizer" data-id="5">
+            <div class="card-media">
+              <img 
+                src="assets/project5.png" 
+                alt="3D Spatial Audio Visualizer with glowing cyan audio waveforms in a dark cyber interface" 
+                class="card-image"
+                loading="lazy"
+                width="600"
+                height="400"
+              >
+              <span class="card-tag">Spatial Audio &amp; AR</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">
+                <a href="#project-5-details" class="card-title-link" data-open-modal="5">Resonance — 3D Spatial Audio Interface</a>
+              </h3>
+              <p class="card-description">
+                An augmented reality audio workstation that renders acoustic frequencies into interactive 3D light streams. Built with WebXR, WebAudio API, and sensory haptic feedback for hearing-impaired sound enthusiasts.
+              </p>
+              <div class="card-footer">
+                <button type="button" class="btn-details" aria-haspopup="dialog" data-project-id="5">
+                  Show details
+                  <svg class="btn-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="project-card" data-category="smart home iot dashboard energy control" data-id="6">
+            <div class="card-media">
+              <img 
+                src="assets/project6.png" 
+                alt="Smart home control center dashboard interface with neon solar and temperature widgets" 
+                class="card-image"
+                loading="lazy"
+                width="600"
+                height="400"
+              >
+              <span class="card-tag">IoT &amp; Smart Systems</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">
+                <a href="#project-6-details" class="card-title-link" data-open-modal="6">Solaria — Sustainable Smart Home Hub</a>
+              </h3>
+              <p class="card-description">
+                A unified IoT control center optimizing renewable solar grid storage and indoor environmental comfort. Offers adaptive screen contrast auto-dimming, focus-friendly grid layouts, and voice action triggers.
+              </p>
+              <div class="card-footer">
+                <button type="button" class="btn-details" aria-haspopup="dialog" data-project-id="6">
+                  Show details
+                  <svg class="btn-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section with Artist Photo and Text -->
+    <section id="about" class="section about-section" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="about-grid">
+          
+          <!-- Artist Photo Column -->
+          <div class="about-media-col">
+            <div class="artist-photo-frame">
+              <img 
+                src="assets/artist_portrait.png" 
+                alt="Portrait of artist Elena Vance in a modern creative studio with warm artistic lighting" 
+                class="artist-photo"
+                loading="lazy"
+                width="540"
+                height="640"
+              >
+              <div class="artist-badge">
+                <span class="experience-num">10+</span>
+                <span class="experience-label">Years of Craft &amp; Innovation</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Artist Biography & Text Column -->
+          <div class="about-content-col">
+            <span class="section-tagline">About The Artist</span>
+            <h2 id="about-heading" class="section-title">Crafting Human-Centered Digital Artistry</h2>
+            
+            <p class="about-text">
+              Hello! I'm <strong>Elena Vance</strong>, a multidisciplinary digital artist, lead UI/UX designer, and web accessibility advocate based in San Francisco. With over a decade of experience bridging the gap between artistic visual storytelling and technical engineering, I create digital experiences that delight the senses while ensuring everyone can interact effortlessly.
+            </p>
+
+            <p class="about-text">
+              My philosophy centers on <em>Universal Design</em>: beauty should never come at the expense of usability or accessibility. Every line of code I write, every color palette I curate, and every interface I prototype adheres strictly to the WCAG 2.1 AAA accessibility benchmarks, proving that high-end modern web aesthetics and full inclusion go hand-in-hand.
+            </p>
+
+            <!-- Key Skills & Highlights -->
+            <div class="about-highlights">
+              <div class="highlight-item">
+                <div class="highlight-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div>
+                  <h4 class="highlight-title">WCAG AAA Accessibility</h4>
+                  <p class="highlight-desc">Semantic HTML5, ARIA patterns, focus control &amp; high contrast modes.</p>
+                </div>
+              </div>
+
+              <div class="highlight-item">
+                <div class="highlight-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                </div>
+                <div>
+                  <h4 class="highlight-title">High Performance</h4>
+                  <p class="highlight-desc">Zero-dependency vanilla CSS/JS, lazy loading &amp; optimized assets.</p>
+                </div>
+              </div>
+
+              <div class="highlight-item">
+                <div class="highlight-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                </div>
+                <div>
+                  <h4 class="highlight-title">Spatial &amp; 3D Systems</h4>
+                  <p class="highlight-desc">Generative art shaders, interactive visualizers &amp; cross-platform design.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Calendar Grid & Events Section -->
+    <section id="events" class="section events-section" aria-labelledby="events-heading">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="section-tagline">Speaking &amp; Exhibitions</span>
+            <h2 id="events-heading" class="section-title">Schedule &amp; Events</h2>
+          </div>
+          <p class="section-description">Explore Elena's keynotes, interactive exhibitions, workshops, and panels for this month.</p>
+        </div>
+
+        <!-- Calendar Toolbar / Controls -->
+        <div class="calendar-toolbar">
+          <!-- Month Header -->
+          <div class="month-selector">
+            <h3 class="current-month-title" id="calendar-month-title">August 2026</h3>
+            <span class="month-badge" id="month-badge-count">6 Active Events</span>
+          </div>
+
+          <!-- View Mode Toggle & Category Filters -->
+          <div class="calendar-controls">
+            <!-- Category Filter Pills -->
+            <div class="category-filters" role="group" aria-label="Filter events by category">
+              <button type="button" class="filter-pill active" data-category="all" aria-pressed="true">All Events</button>
+              <button type="button" class="filter-pill" data-category="keynote" aria-pressed="false">
+                <span class="category-dot category-dot-keynote"></span>Keynotes
+              </button>
+              <button type="button" class="filter-pill" data-category="exhibition" aria-pressed="false">
+                <span class="category-dot category-dot-exhibition"></span>Exhibitions
+              </button>
+              <button type="button" class="filter-pill" data-category="workshop" aria-pressed="false">
+                <span class="category-dot category-dot-workshop"></span>Workshops
+              </button>
+              <button type="button" class="filter-pill" data-category="panel" aria-pressed="false">
+                <span class="category-dot category-dot-panel"></span>Panels
+              </button>
+              <button type="button" class="filter-pill" data-category="webinar" aria-pressed="false">
+                <span class="category-dot category-dot-webinar"></span>Webinars
+              </button>
+            </div>
+
+            <!-- Grid / List View Toggle -->
+            <div class="view-toggle-group" role="radiogroup" aria-label="Calendar layout view">
+              <button type="button" class="view-toggle-btn active" id="btn-view-grid" role="radio" aria-checked="true" aria-label="Grid View">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                <span>Grid</span>
+              </button>
+              <button type="button" class="view-toggle-btn" id="btn-view-list" role="radio" aria-checked="false" aria-label="List View">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                <span>List</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Status Announcer for Screen Readers -->
+        <div id="calendar-status-msg" class="sr-only" aria-live="polite">Showing all 6 events for August 2026</div>
+
+        <!-- Visual Calendar Grid Card -->
+        <div id="calendar-grid-view" class="calendar-card">
+          <!-- Weekday Headers -->
+          <div class="calendar-weekdays" role="row">
+            <div class="weekday-header" role="columnheader"><abbr title="Sunday">Sun</abbr></div>
+            <div class="weekday-header" role="columnheader"><abbr title="Monday">Mon</abbr></div>
+            <div class="weekday-header" role="columnheader"><abbr title="Tuesday">Tue</abbr></div>
+            <div class="weekday-header" role="columnheader"><abbr title="Wednesday">Wed</abbr></div>
+            <div class="weekday-header" role="columnheader"><abbr title="Thursday">Thu</abbr></div>
+            <div class="weekday-header" role="columnheader"><abbr title="Friday">Fri</abbr></div>
+            <div class="weekday-header" role="columnheader"><abbr title="Saturday">Sat</abbr></div>
+          </div>
+
+          <!-- Calendar Days Grid -->
+          <div class="calendar-days-grid" id="calendar-days-container" role="grid" aria-label="August 2026 Event Calendar Grid">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+
+        <!-- Accessible List View (Hidden by default) -->
+        <div id="calendar-list-view" class="calendar-list-container hidden">
+          <div class="events-list" id="events-list-container" role="list">
+            <!-- List items populated dynamically via JS -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="section contact-section" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="contact-card">
+          <div class="contact-header text-center">
+            <span class="section-tagline">Let's Connect</span>
+            <h2 id="contact-heading" class="section-title">Start a Project or Inquiry</h2>
+            <p class="section-description">Have an upcoming creative project, accessibility audit, or collaboration in mind? Send me a message below.</p>
+          </div>
+
+          <!-- Interactive Contact Form -->
+          <form id="contact-form" class="contact-form" novalidate>
+            <!-- Form Status Banner -->
+            <div id="form-status" class="form-status hidden" role="alert" aria-live="assertive"></div>
+
+            <div class="form-grid">
+              <!-- Full Name Field -->
+              <div class="form-group">
+                <label for="contact-name" class="form-label">
+                  Full Name <span class="required-asterisk" aria-hidden="true">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="contact-name" 
+                  name="name" 
+                  class="form-control" 
+                  placeholder="e.g. Maya Lin"
+                  required
+                  aria-required="true"
+                  aria-describedby="name-error"
+                  autocomplete="name"
+                >
+                <span id="name-error" class="error-message hidden" aria-live="polite">Please enter your full name.</span>
+              </div>
+
+              <!-- Email Address Field -->
+              <div class="form-group">
+                <label for="contact-email" class="form-label">
+                  Email Address <span class="required-asterisk" aria-hidden="true">*</span>
+                </label>
+                <input 
+                  type="email" 
+                  id="contact-email" 
+                  name="email" 
+                  class="form-control" 
+                  placeholder="e.g. maya@example.com"
+                  required
+                  aria-required="true"
+                  aria-describedby="email-error"
+                  autocomplete="email"
+                >
+                <span id="email-error" class="error-message hidden" aria-live="polite">Please enter a valid email address.</span>
+              </div>
+            </div>
+
+            <!-- Subject Field -->
+            <div class="form-group">
+              <label for="contact-subject" class="form-label">
+                Subject Topic <span class="required-asterisk" aria-hidden="true">*</span>
+              </label>
+              <select 
+                id="contact-subject" 
+                name="subject" 
+                class="form-control" 
+                required
+                aria-required="true"
+                aria-describedby="subject-error"
+              >
+                <option value="" disabled selected>Select a subject...</option>
+                <option value="collaboration">New Creative Collaboration</option>
+                <option value="audit">Web Accessibility (a11y) Audit</option>
+                <option value="exhibition">Art Exhibition Inquiry</option>
+                <option value="other">General Question / Say Hello</option>
+              </select>
+              <span id="subject-error" class="error-message hidden" aria-live="polite">Please select a subject topic.</span>
+            </div>
+
+            <!-- Message Field -->
+            <div class="form-group">
+              <label for="contact-message" class="form-label">
+                Your Message <span class="required-asterisk" aria-hidden="true">*</span>
+              </label>
+              <textarea 
+                id="contact-message" 
+                name="message" 
+                class="form-control" 
+                rows="5" 
+                placeholder="Tell me about your project goals, timeline, or thoughts..." 
+                required
+                aria-required="true"
+                aria-describedby="message-error"
+              ></textarea>
+              <span id="message-error" class="error-message hidden" aria-live="polite">Please write your message (minimum 10 characters).</span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-actions">
+              <button type="submit" id="submit-btn" class="btn btn-primary btn-submit">
+                <span class="btn-text">Send Message</span>
+                <svg class="btn-spinner hidden" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10" stroke-dasharray="32" stroke-dashoffset="12"/></svg>
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Project Details Accessible Dialog -->
+  <dialog id="project-modal" class="project-modal" aria-labelledby="modal-title" aria-describedby="modal-desc">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content-wrapper">
+      
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <span id="modal-tag" class="card-tag">Project Tag</span>
+        <button type="button" id="modal-close-btn" class="modal-close-btn" aria-label="Close project details dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <img id="modal-image" src="" alt="" class="modal-image">
+        <h2 id="modal-title" class="modal-title">Project Title</h2>
+        <p id="modal-desc" class="modal-description">Full detailed project description and background story.</p>
+        
+        <div class="modal-specs">
+          <div class="spec-block">
+            <span class="spec-label">Category</span>
+            <span id="modal-category" class="spec-val">Category Name</span>
+          </div>
+          <div class="spec-block">
+            <span class="spec-label">Year</span>
+            <span id="modal-year" class="spec-val">2026</span>
+          </div>
+          <div class="spec-block">
+            <span class="spec-label">Client / Role</span>
+            <span id="modal-client" class="spec-val">Role Name</span>
+          </div>
+        </div>
+
+        <div class="modal-tech-stack">
+          <h4 class="tech-stack-title">Technologies &amp; Accessibility Features</h4>
+          <ul id="modal-tech-list" class="tech-tags">
+            <!-- Populated dynamically via JS -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <a id="modal-external-link" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          View Live Demo
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <button type="button" class="btn btn-secondary modal-secondary-close">Close</button>
+      </div>
+
+    </div>
+  </dialog>
+
+  <!-- Event Details Accessible Dialog -->
+  <dialog id="event-modal" class="event-modal project-modal" aria-labelledby="event-modal-title" aria-describedby="event-modal-desc">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content-wrapper">
+      
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <span id="event-modal-category" class="card-tag">Event Category</span>
+        <button type="button" id="event-modal-close-btn" class="modal-close-btn" aria-label="Close event details dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <div class="event-modal-badge-row">
+          <span id="event-modal-date" class="event-date-badge">Wednesday, Aug 5, 2026</span>
+          <span id="event-modal-time" class="event-time-badge">10:00 AM PST</span>
+        </div>
+        <h2 id="event-modal-title" class="modal-title">Event Title</h2>
+        <p id="event-modal-desc" class="modal-description">Full event details and summary.</p>
+        
+        <div class="modal-specs">
+          <div class="spec-block">
+            <span class="spec-label">Location / Format</span>
+            <span id="event-modal-location" class="spec-val">San Francisco &amp; Virtual</span>
+          </div>
+          <div class="spec-block">
+            <span class="spec-label">Role</span>
+            <span id="event-modal-role" class="spec-val">Keynote Speaker</span>
+          </div>
+          <div class="spec-block">
+            <span class="spec-label">Organizer</span>
+            <span id="event-modal-organizer" class="spec-val">Inclusive Tech Alliance</span>
+          </div>
+        </div>
+
+        <div class="modal-tech-stack">
+          <h4 class="tech-stack-title">Topics &amp; Key Highlights</h4>
+          <ul id="event-modal-topics" class="tech-tags">
+            <!-- Populated dynamically via JS -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" id="event-modal-add-cal" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Add to Calendar
+        </button>
+        <button type="button" class="btn btn-secondary event-modal-secondary-close">Close</button>
+      </div>
+
+    </div>
+  </dialog>
+
+  <!-- Site Footer landmark -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="brand-logo" aria-label="Elena Vance Portfolio Home">
+            <svg class="logo-icon" aria-hidden="true" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="32" height="32" rx="8" fill="url(#logo-grad-foot)"/>
+              <path d="M9 23V9L17 17L23 9V23" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="logo-grad-foot" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#8B5CF6"/>
+                  <stop offset="1" stop-color="#06B6D4"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <span class="brand-text">Elena Vance</span>
+          </a>
+          <p class="footer-tagline">Building an accessible, vibrant digital frontier where aesthetics and universal inclusion thrive.</p>
+        </div>
+
+        <!-- Social Media / Connectivity links -->
+        <div class="footer-social">
+          <span class="footer-heading">Connect</span>
+          <ul class="social-links" aria-label="Social media profiles">
+            <li>
+              <a href="#" aria-label="GitHub Profile (opens in new tab)" target="_blank" rel="noopener noreferrer" class="social-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                <span class="sr-only">GitHub</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" aria-label="LinkedIn Profile (opens in new tab)" target="_blank" rel="noopener noreferrer" class="social-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                <span class="sr-only">LinkedIn</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" aria-label="Dribbble Portfolio (opens in new tab)" target="_blank" rel="noopener noreferrer" class="social-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M19.13 5.09C15.22 9.14 10 10.44 2.25 10.94"/><path d="M21.75 12.84c-6.62-1.41-12.14 1-16.38 6.32"/><path d="M8.56 2.75c4.37 6 6 9.42 8 18.42"/></svg>
+                <span class="sr-only">Dribbble</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2026 Elena Vance. All rights reserved.</p>
+        
+        <!-- Required Footer Policy Links as requested (pointing to #) -->
+        <nav class="footer-legal-nav" aria-label="Legal policies navigation">
+          <ul class="legal-links">
+            <li><a href="#" aria-label="Required Policies">Required Policies</a></li>
+            <li><a href="#" aria-label="Cookie Policy">Cookies Policy</a></li>
+            <li><a href="#" aria-label="Accessibility Statement">Accessibility Statement</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
