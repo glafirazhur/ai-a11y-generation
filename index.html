@@ -116,6 +116,7 @@
   <main>
 
     <!-- 6 Latest Project Cards Section -->
+    <!-- 
     <div id="projects" class="section projects-section" aria-labelledby="projects-heading">
       <div class="container">
         <div class="section-header">
@@ -127,13 +128,10 @@
             app UI/UX, 3D generative art, and accessible commerce platforms.</p>
         </div>
 
-        <!-- Filter / Search Results Summary -->
         <div id="search-results-count" class="search-status" aria-live="polite">Showing all 6 projects</div>
 
-        <!-- Project Cards Grid -->
         <div class="projects-grid" id="projects-container">
 
-          <!-- Card 1 -->
           <article class="project-card" data-category="visualization analytics data dark" data-id="1">
             <div class="card-media">
               <img src="assets/project1.png"
@@ -162,7 +160,6 @@
             </div>
           </article>
 
-          <!-- Card 2 -->
           <article class="project-card" data-category="mobile application eco design UX" data-id="2">
             <div class="card-media">
               <img src="assets/project2.png"
@@ -192,7 +189,6 @@
             </div>
           </article>
 
-          <!-- Card 3 -->
           <article class="project-card" data-category="generative 3d art brand logo" data-id="3">
             <div class="card-media">
               <img src="assets/project3.png"
@@ -221,7 +217,6 @@
             </div>
           </article>
 
-          <!-- Card 4 -->
           <article class="project-card" data-category="ecommerce luxury web dynamic accessible" data-id="4">
             <div class="card-media">
               <img src="assets/project4.png"
@@ -251,7 +246,6 @@
             </div>
           </article>
 
-          <!-- Card 5 -->
           <article class="project-card" data-category="spatial audio ar 3d interface visualizer" data-id="5">
             <div class="card-media">
               <img src="assets/project5.png"
@@ -281,7 +275,7 @@
             </div>
           </article>
 
-          <!-- Card 6 -->
+      
           <article class="project-card" data-category="smart home iot dashboard energy control" data-id="6">
             <div class="card-media">
               <img src="assets/project6.png"
@@ -313,6 +307,7 @@
         </div>
       </div>
     </div>
+    -->
 
     <!-- About Section with Artist Photo and Text -->
     <div id="about" class="section about-section" aria-labelledby="about-heading">
@@ -549,10 +544,10 @@
 
             <!-- Subject Field -->
             <div class="form-group">
-              <div for="contact-subject" class="form-label">
+              <div role="label" for="contact-subject" class="form-label">
                 Subject Topic <span class="required-asterisk" aria-hidden="true">*</span>
               </div>
-              <select id="contact-subject" name="subject" class="form-control" required aria-required="true">
+              <select id="contact-subject" name="subject" class="form-control" aria-required="true">
                 <option value="" disabled selected>Select a subject...</option>
                 <option value="collaboration">New Creative Collaboration</option>
                 <option value="audit">Web Accessibility (a11y) Audit</option>
